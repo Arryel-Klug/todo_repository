@@ -1,5 +1,1 @@
-adiciona um comentario em cada linha de código
 
- 1. Quando tu for salvar no localstorsge quero que tu salve um obj com a task e um id, esse id eu quero q tu gere um aleatorio pra cada tarefa em forma de hash
- 2. Quando no html da lista quero q tu salve esse id como o id do html da lista, dai cada <li> vai ter um id
- 3. Ao lado do item da lista quero q tu adicione um botao de excluir que chama um metodo de exclusao desse item da lista
