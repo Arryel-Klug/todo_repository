@@ -1,9 +1,9 @@
 export class GenerateUUID {
     constructor() {
-        this.uuid = this.gerar();
+        this.uuid = this.generate();
     }
 
-    gerar() {
+    generate() {
         const crypto = window.crypto || window.msCrypto;
         const bytes = new Uint8Array(16);
         crypto.getRandomValues(bytes);
@@ -35,7 +35,7 @@ export class GenerateUUID {
 
     getUUID() {
         return this.uuid;
-    }
+    };
 
 
 };

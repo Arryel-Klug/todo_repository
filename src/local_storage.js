@@ -1,56 +1,59 @@
-import { formatDateTime } from "./utils/format_date.js";
-import { generateUUID } from "./utils/generate_uuid.js"
+import { FormatDate } from "./utils/format_date.js";
+import { GenerateUUID } from "./utils/generate_uuid.js";
 
 export class LocalStorage {
     constructor() {
         this.list = [];
 
-        this.carregar();
+        this.load();
     };
 
-    adicionar(task) {
-        const id = generateUUID();
-        const dataCriacao = formatDateTime(new Date());
+    add(task) {
+        const formatDate = new FormatDate();
+        const generateUUID = new GenerateUUID();
+
+        const id = generateUUID.getUUID();
+
+        const creationDate = formatDate.formatToDateTime(new Date());
+        console.log(formatDate.toObjectDate('1996/06/24 11:11:11'));
         const status = false;
 
-        this.list.push({ id,task, dataCriacao, feito: status });
+        this.list.push({ id, task, dataCriacao: creationDate, feito: status });
 
-        this.salvar();
+        this.save();
     };
 
-    remover(id) {
+    remove(id) {
         const index = this.list.findIndex(tasks => tasks.id === id);
 
         this.list.splice(index,1);
 
-        this.salvar();
+        this.save();
     };
 
-    alterarStatus(id) {
+    changeStatus(id) {
         const index = this.list.findIndex(tasks => tasks.id === id);
 
         if(this.list[index].feito === false) {
            this.list[index].feito = true;
 
         } else {
-
             this.list[index].feito = false;
         }
 
-        this.salvar();
+        this.save();
     };
 
-    salvar() {
+    save() {
 
         localStorage.setItem("lista", JSON.stringify(this.list));
     };
 
-    carregar() {
+    load() {
+        const list = localStorage.getItem("lista") ;
 
-        const lista = localStorage.getItem("lista") ;
-
-        if (lista){
-            this.list = JSON.parse(lista);
+        if (list){
+            this.list = JSON.parse(list);
         }
     };
 
