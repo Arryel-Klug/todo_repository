@@ -15,7 +15,6 @@ export class LocalStorage {
         const id = generateUUID.getUUID();
 
         const creationDate = formatDate.formatToDateTime(new Date());
-        console.log(formatDate.toObjectDate('1996/06/24 11:11:11'));
         const status = false;
 
         this.list.push({ id, task, dataCriacao: creationDate, feito: status });

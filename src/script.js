@@ -1,6 +1,8 @@
 import { LocalStorage } from "./Local_storage.js";
+import { DataValidation } from "./utils/data_validation.js";
 
 const localStorage = new LocalStorage();
+const dataValidation = new DataValidation();
 
 loadTasks();
 
@@ -24,13 +26,14 @@ function addTask() {
 
     const input = document.getElementById("input");
     const task = input.value.trim("");
+    const taskIsValid = dataValidation.validation(task, localStorage.list);
 
-    if(task === "") {
-        alert("Digite uma tarefa");
+    if(!taskIsValid) {
+        input.value = ""
         return;
-    }
+    };
 
-    localStorage.add(task);
+    localStorage.add(taskIsValid);
 
     loadTasks();
 
@@ -62,7 +65,7 @@ function loadTasks() {
         const strikethrough = status === "checked" ? '<s>' : '';
         list.innerHTML +=
             `${strikethrough}
-                <li id="${task.id}" style="border: 1px solid black; padding: 10px; ">
+                <li id="${task.id}" style="border: 1px solid black; padding: 10px;">
                     <div>
                     Criado em: ${task.dataCriacao}
                     <br>
